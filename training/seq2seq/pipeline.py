@@ -8,6 +8,8 @@ import argparse
 import glob
 import json
 from dataProcessor import processData
+import wandb
+
 
 FILEDIR = os.path.dirname(__file__)
 
@@ -40,7 +42,7 @@ def train(args):
             -tgt_subword_alpha {args.alpha} \
             -src_seq_length {args.src_seq_length} \
             -tgt_seq_length {args.tgt_seq_length} \
-            -save_model \"{os.path.join(args.output_dir, "Models", args.model_prefix)}\" \
+            -save_model \"{os.path.join(args.model_output_dir, "Models", args.model_prefix)}\" \
             -layers {args.layers} -rnn_size {args.rnn_size} -word_vec_size {args.word_vec_size} -transformer_ff {args.transformer_ff} -heads {args.heads}  \
 			-encoder_type transformer -decoder_type transformer -position_encoding \
             -train_steps {args.train_steps} -max_generator_batches 2 -dropout 0.1 \
@@ -218,6 +220,7 @@ def evaluate(args):
 
 
 def main(args):
+    wandb.init(project="banglaT5", config=args)
     processData(args, True)
     if args.do_train:
         train(args)
@@ -226,7 +229,7 @@ def main(args):
     if args.do_eval:
         evaluate(args)
     
-                            
+    wandb.finish()                       
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -240,6 +243,12 @@ if __name__ == "__main__":
         required=True,
         metavar='PATH',
         help="Output directory")
+
+    parser.add_argument(
+        '--model_output_dir', '-o', type=str,
+        required=True,
+        metavar='PATH',
+        help="Models Output directory")
 
     parser.add_argument(
         '--src_lang', type=str,
