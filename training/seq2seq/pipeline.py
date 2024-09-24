@@ -245,7 +245,7 @@ if __name__ == "__main__":
         help="Output directory")
 
     parser.add_argument(
-        '--model_output_dir', '-o', type=str,
+        '--model_output_dir', '-om', type=str,
         required=True,
         metavar='PATH',
         help="Models Output directory")
