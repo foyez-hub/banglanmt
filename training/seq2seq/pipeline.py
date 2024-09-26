@@ -220,7 +220,7 @@ def evaluate(args):
 
 
 def main(args):
-    wandb.init(project="banglaT5", config=args)
+   
     processData(args, True)
     if args.do_train:
         train(args)
