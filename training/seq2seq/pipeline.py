@@ -186,7 +186,7 @@ def write_scores(scores, output_path):
 def evaluate(args):
     if args.model_prefix:
         model_paths = sorted(
-            glob.glob(os.path.join(args.output_dir, "Models", f"{args.model_prefix}*.pt")),
+            glob.glob(os.path.join(args.model_output_dir, "Models", f"{args.model_prefix}*.pt")),
             key=lambda p: int(re.search(r"_step_(\d+)", p).group(1))
         )
         model_scores = {} 
@@ -199,8 +199,8 @@ def evaluate(args):
         write_scores(
             model_scores,
             os.path.join(
-                args.output_dir, 
-                "Reports", f"{args.model_output_dir}.valid.{args.src_lang}2{args.tgt_lang}.log"
+                args.model_output_dir, 
+                "Reports", f"{args.model_prefix}.valid.{args.src_lang}2{args.tgt_lang}.log"
             )
         )
     
@@ -210,7 +210,7 @@ def evaluate(args):
         processData(args, False)
         scores = calculate_scores(args, "test")
         model_scores[os.path.basename(args.eval_model)] = scores
-
+        
         write_scores(
             model_scores,
             os.path.join(
