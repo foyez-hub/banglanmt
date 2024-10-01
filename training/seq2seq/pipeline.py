@@ -200,7 +200,7 @@ def evaluate(args):
             model_scores,
             os.path.join(
                 args.output_dir, 
-                "Reports", f"{args.model_prefix}.valid.{args.src_lang}2{args.tgt_lang}.log"
+                "Reports", f"{args.model_output_dir}.valid.{args.src_lang}2{args.tgt_lang}.log"
             )
         )
     
@@ -214,7 +214,7 @@ def evaluate(args):
         write_scores(
             model_scores,
             os.path.join(
-                args.output_dir, "Reports", f"{os.path.basename(args.eval_model)}.test.{args.src_lang}2{args.tgt_lang}.log"
+                args.model_output_dir, "Reports", f"{os.path.basename(args.eval_model)}.test.{args.src_lang}2{args.tgt_lang}.log"
             )
         )
 
