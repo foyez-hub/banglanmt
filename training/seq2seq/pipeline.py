@@ -42,7 +42,7 @@ def train(args):
             -tgt_subword_alpha {args.alpha} \
             -src_seq_length {args.src_seq_length} \
             -tgt_seq_length {args.tgt_seq_length} \
-            -save_model \"{os.path.join(args.model_output_dir, "Models", args.model_prefix)}\" \
+            -save_model \"{os.path.join(args.output_dir, "Models", args.model_prefix)}\" \
             -layers {args.layers} -rnn_size {args.rnn_size} -word_vec_size {args.word_vec_size} -transformer_ff {args.transformer_ff} -heads {args.heads}  \
 			-encoder_type transformer -decoder_type transformer -position_encoding \
             -train_steps {args.train_steps} -max_generator_batches 2 -dropout 0.1 \
