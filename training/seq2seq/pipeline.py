@@ -186,7 +186,7 @@ def write_scores(scores, output_path):
 def evaluate(args):
     if args.model_prefix:
         model_paths = sorted(
-            glob.glob(os.path.join(args.model_output_dir, "Models", f"{args.model_prefix}*.pt")),
+            glob.glob(os.path.join(args.output_dir, "Models", f"{args.model_prefix}*.pt")),
             key=lambda p: int(re.search(r"_step_(\d+)", p).group(1))
         )
         model_scores = {} 
